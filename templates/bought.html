@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{stock["symbol"] Purchased}}
+{% endblock %}
+
+{% block main %}
+    <h2>STOCK NAME: {{stock["name"]}}</h2>
+    <h2>STOCK PRICE: {{stock["price"] | usd}}</h2>
+    <h2>STOCK SYMBOL: {{stock["symbol"]}}</h2>
+{% endblock %}

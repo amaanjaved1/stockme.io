@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+My Portfolio
+{% endblock %}
+
+{% block main %}
+<div class="section">
+    <h2>My Portfolio</h2>
+    {% if invested["SUM(value)"] == None %}
+        <h2>Start Investing Now By Clicking On The Buy Page!</h2>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>SYMBOL</th>
+                    <th>NAME</th>
+                    <th>SHARE PRICE</th>
+                    <th>SHARES</th>
+                    <th>TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in port%}
+                <tr>
+                    <td>{{stock["symbol"]}}</td>
+                    <td>{{stock["name"]}}</td>
+                    <td>{{(stock["value"]/stock["shares"]) | usd}}</td>
+                    <td>{{stock["shares"]}}</td>
+                    <td>{{stock["value"] | usd}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <h2>Cash Available: {{cash["cash"] | usd}}</h2>
+    {% if invested["SUM(value)"] == None %}
+        <h2>Total Invested: $0.00</h2>
+    {% else %}
+        <h2>Total Invested: {{invested["SUM(value)"] | usd}}</h2>
+    {% endif %}
+</div>
+{% endblock %}

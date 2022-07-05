@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Transaction History
+{% endblock %}
+
+{% block main %}
+<div class="section">
+    <h2>My Transactions</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Transaction Type</th>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in history %}
+            <tr>
+                <td>{{transaction["id"]}}</td>
+                <td>{{transaction["type"]}}</td>
+                <td>{{transaction["symbol"]}}</td>
+                <td>{{transaction["shares"]}}</td>
+                <td>{{transaction["price"] | usd}}</td>
+                <td>{{transaction["date"]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

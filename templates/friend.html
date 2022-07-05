@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Friends
+{% endblock %}
+
+{% block main %}
+    <h1>Add a Friend</h1>
+    <h5>Enter Username Below</h5>
+    <form action="/friend" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Add Friend</button>
+    </form>
+    <hr style = "margin: 50px;">
+    {% for each in friends%}
+        <h3>{{each[3]["username"]}}'s Portfolio</h2>
+        {% if each[2]["SUM(value)"] == None %}
+            <h2>Player has nothing invested currently</h2>
+        {% else %}
+        <table class="table table-dark table-hover table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">SYMBOL</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">SHARE PRICE</th>
+                    <th scope="col">SHARES</th>
+                    <th scope="col">TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in each[0] %}
+                <tr>
+                    <td>{{stock["symbol"]}}</td>
+                    <td>{{stock["name"]}}</td>
+                    <td>{{(stock["value"]/stock["shares"]) | usd}}</td>
+                    <td>{{stock["shares"]}}</td>
+                    <td>{{stock["value"] | usd}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        <h4>Cash Available: {{each[1]["cash"] | usd}}</h2>
+            {% if each[2]["SUM(value)"] == None %}
+                <h4>Total Invested:            $0.00</h2>
+            {% else %}
+                <h4>Total Invested:            {{each[2]["SUM(value)"] | usd}}</h2>
+            {% endif %}
+        <hr>
+    {% endfor %}
+
+{% endblock %}

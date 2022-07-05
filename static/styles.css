@@ -1,0 +1,81 @@
+/* Define colors */
+:root {
+    --black: #090909;
+    --dgray: #201E1E;
+    --orange: #F5B301;
+    --banana: #FED053;
+    --white: #FFFFFF;
+}
+
+body{
+    background-color: var(--dgray);
+    color: var(--white);
+    font-family: "Palatino";
+}
+
+.container-fluid .navbar-brand
+{
+    font-size: xx-large;
+    font-family: "Courier New";
+    margin-right: 2rem;
+    margin-left: 0;
+    color: var(--orange);
+
+}
+
+.container-fluid .navbar-brand:hover
+{
+    color: var(--white);
+    transition: color 0.7s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+.vl {
+    border-left: 3px solid var(--white);
+    height: 55px;
+    margin-left: 1.7em;
+}
+
+body #backnav{
+    background-color: var(--black);
+    background-image: radial-gradient(var(--white) 1px, transparent 0);
+    background-size: 40px 40px;
+}
+
+#navbar a.nav-link {
+    color: var(--banana);
+    background:
+    linear-gradient(to right, #FFFFFF, #FFFFFF),
+    linear-gradient(to right, var(--banana), var(--orange));
+    background-size: 100% 0.1em, 0 0.1em;
+    background-position: 90% 94%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 300ms;
+    font-size: 1.1em;
+    margin-bottom: 0.3em;
+    margin-left: 1.5em;
+}
+
+#navbar a.nav-link:hover,#navbar a.nav-link:focus  {
+    background-size: 0 0.2em, 100% 0.1em;
+}
+
+.logo-image{
+    width: 46px;
+    height: 55px;
+    overflow: hidden;
+    margin-top: 0px;
+}
+
+table, td {
+    border: 1px solid;
+  }
+
+th {
+    border: 4px solid;
+
+}
+
+h4 {
+    text-align: right;
+    text-decoration: underline;
+}
