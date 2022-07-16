@@ -1,4 +1,4 @@
-# stockme.io --- WORK IN PROGRESS
+# stockme.io --- WORK IN PROGRESS NEED TO (format CSS, add graphs and chart, API for news)
 
 ## PURPOSE:
 Stock trading simulator to expose younger audience to stock trading and finance. 
