@@ -3,8 +3,9 @@
 ## PURPOSE:
 Stock trading simulator to expose younger audience to stock trading and finance. 
 
-## HOW TO USE: 
-Download repository and run as any other flask server. Start by registering for an account and start buying stocks! All players start off with $10k.
+## HOW TO USE (Commands): 
+$ export API_KEY = pk_b2eab506f4794a08a10f1df5658cac4b
+$ flask run
 
 ## SYTEM REQUIREMENTS: 
 see requirements.txt
