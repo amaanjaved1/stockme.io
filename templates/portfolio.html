@@ -33,11 +33,11 @@ My Portfolio
         </tbody>
     </table>
     {% endif %}
-    <h4>Cash Available: {{cash["cash"] | usd}}</h2>
+    <h4><span style="font-weight: bold;"> Liquid Cash:</span> {{cash["cash"] | usd}}</h4>
     {% if invested["SUM(value)"] == None %}
-        <h4>Total Invested: $0.00</h2>
+        <h4><span style="font-weight: bold;">Invested:</span> $0.00</h2>
     {% else %}
-        <h4>Total Invested: {{invested["SUM(value)"] | usd}}</h2>
+        <h4><span style="font-weight: bold;"> Stocks Value:</span> {{invested["SUM(value)"] | usd}}</h4>
     {% endif %}
 </div>
 {% endblock %}

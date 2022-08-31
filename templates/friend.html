@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main %}
-    <h1>Add a Friend</h1>
+    <h2>Add a Friend</h2>
     <h5>Enter Username Below</h5>
     <form action="/friend" method="post">
         <div class="mb-3">
@@ -15,7 +15,7 @@
     </form>
     <hr style = "margin: 50px;">
     {% for each in friends%}
-        <h3>{{each[3]["username"]}}'s Portfolio</h2>
+        <h3>{{each[3]["username"]}}'s Portfolio</h3>
         {% if each[2]["SUM(value)"] == None %}
             <h2>Player has nothing invested currently</h2>
         {% else %}
@@ -42,11 +42,11 @@
             </tbody>
         </table>
         {% endif %}
-        <h4>Cash Available: {{each[1]["cash"] | usd}}</h2>
+        <h4><span style="font-weight: bold;">Liquid Cash:</span> {{each[1]["cash"] | usd}}</h4>
             {% if each[2]["SUM(value)"] == None %}
-                <h4>Total Invested:            $0.00</h2>
+                <h4><span style="font-weight: bold;"> Stocks Value:</span> $0.00</h4>
             {% else %}
-                <h4>Total Invested:            {{each[2]["SUM(value)"] | usd}}</h2>
+                <h4><span style="font-weight: bold;"> Stocks Value:</span> {{each[2]["SUM(value)"] | usd}}</h4>
             {% endif %}
         <hr>
     {% endfor %}

@@ -70,10 +70,6 @@ def after_request(response):
     return response
 
 
-@app.route("/")
-@login_required
-def index():
-    return apology("currently working on", 400)
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -173,7 +169,7 @@ def logout():
     return redirect("/")
 
 
-@app.route("/quote", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 @login_required
 def quote():
     if request.method == "POST":

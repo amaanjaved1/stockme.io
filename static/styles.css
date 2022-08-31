@@ -13,6 +13,10 @@ body{
     font-family: "Palatino";
 }
 
+.title {
+    color: var(--orange);
+}
+
 .container-fluid .navbar-brand
 {
     font-size: xx-large;
@@ -77,5 +81,4 @@ th {
 
 h4 {
     text-align: right;
-    text-decoration: underline;
 }
