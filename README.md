@@ -17,7 +17,8 @@ Stock trading platform simulator to teach young kids about Finance/stock markets
 1. Install SetupTools ($ pip install setuptools)
 1. Install pip ($ easy_install pip)
 1. Install Flask ($ pip install flask)
-1. Create IEX API Access Token (see below)
+2. Install cs50 module ($ pip install cs50)
+3. Create IEX API Access Token (see below)
 
 ### Create API Access Token
 - Visit iexcloud.io/cloud-login#/register/.
