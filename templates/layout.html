@@ -62,6 +62,11 @@
                 </div>
             </header>
         {% endif %}
+        {% if redirect_message == True %}
+        <div class="alert alert-danger" role="alert">
+            You have requested an invalid URL.
+        </div>
+        {% endif %}
 
         <main class="container-fluid py-5 text-center">
             {% block main %}{% endblock %}

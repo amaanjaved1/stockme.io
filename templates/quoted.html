@@ -5,7 +5,24 @@
 {% endblock %}
 
 {% block main %}
-    <h2>STOCK NAME: {{stock["name"]}}</h2>
-    <h2>STOCK PRICE: {{stock["price"] | usd}}</h2>
-    <h2>STOCK SYMBOL: {{stock["symbol"]}}</h2>
+    <h2>STOCK NAME:</h2>
+    <h5 class="quote_results">{{stock["name"]}}</h5>
+    <h2>STOCK PRICE:</h2>
+    <h5 class="quote_results"> {{stock["price"] | usd}}</h5>
+    <h2>STOCK SYMBOL:</h2>
+    <h5 class="quote_results"> {{stock["symbol"]}}</h5>
+    <hr style = "margin: 50px;">
+    <h2>Available Cash:</h2>
+    <h5 class="quote_results"> {{cash["cash"] | usd}}</h5>
+    <hr style = "margin: 50px;">
+    <h2>Place A Purchase Order</h2>
+    <form action="/buy" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="symbol" name="symbol" type="text" placeholder="Symbol">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="Share Count" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Purchase</button>
+    </form>
 {% endblock %}

@@ -1,4 +1,5 @@
 import os
+from types import NoneType
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
@@ -14,6 +15,15 @@ def isfloat(num):
         return True
     except ValueError:
         return False
+
+def update_portfolio(user_id):
+    portfolio = db.execute("SELECT * FROM portfolio WHERE user_id = ?", user_id)
+    for each in portfolio:
+        stock = each['symbol']
+        shares = each['shares']
+        share_price = lookup(stock)['price']
+        current_value = round(shares * share_price, 2)
+        db.execute("UPDATE portfolio SET value = ? WHERE user_id = ? AND symbol = ?", current_value, user_id, stock)
 
 def transact_portfolio(transaction_type, user_id, symbol, value, shares, name, final_shares):
     response = db.execute("SELECT * FROM portfolio WHERE user_id = ? AND symbol = ?", user_id, symbol)
@@ -57,6 +67,10 @@ db = SQL("sqlite:///finance.db")
 if not os.environ.get("API_KEY"):
     pass
     # raise RuntimeError("API_KEY not set")
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("quote.html", redirect_message=True)
 
 @app.context_processor
 def example():
@@ -179,7 +193,9 @@ def quote():
             return apology("must provide ticker symbol", 400)
         stock = lookup(symbol)
         if stock:
-            return render_template("quoted.html", stock=stock)
+            user_id = session["user_id"]
+            cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]
+            return render_template("quoted.html", stock=stock, cash=cash)
         else:
            return apology("stock not found", 400)
     else:
@@ -292,26 +308,32 @@ def friend():
         return render_template("friend.html", friends=friend_list_status)
     else:
         user_id = session["user_id"]
-        friend_list = db.execute("SELECT friends FROM users WHERE id=?", user_id)[0]["friends"].split(",")
-        friend_list_status = []
-        for each in friend_list:
-            dicts = {}
-            friend_user_id = db.execute("SELECT id FROM users WHERE username = ?", each)[0]["id"]
-            port = db.execute("SELECT * FROM portfolio WHERE user_id = ?", friend_user_id)
-            cash = db.execute("SELECT cash FROM users WHERE id = ?", friend_user_id)[0]
-            invested = db.execute("SELECT SUM(value) FROM portfolio WHERE user_id = ?", friend_user_id)[0]
-            name = db.execute("SELECT username FROM users WHERE id = ?", friend_user_id)[0]
-            keys = range(4)
-            values = [port, cash, invested, name]
-            for i in keys:
-                dicts[i] = values[i]
-            friend_list_status.append(dicts)
-        return render_template("friend.html", friends=friend_list_status)
+        friend_list = db.execute("SELECT friends FROM users WHERE id=?", user_id)[0]["friends"]
+        if friend_list == None: 
+            return render_template("friend.html")
+        else:
+            friend_list = db.execute("SELECT friends FROM users WHERE id=?", user_id)[0]["friends"].split(",")
+            friend_list_status = []
+            for each in friend_list:
+                dicts = {}
+                friend_user_id = db.execute("SELECT id FROM users WHERE username = ?", each)[0]["id"]
+                update_portfolio(friend_user_id)
+                port = db.execute("SELECT * FROM portfolio WHERE user_id = ?", friend_user_id)
+                cash = db.execute("SELECT cash FROM users WHERE id = ?", friend_user_id)[0]
+                invested = db.execute("SELECT SUM(value) FROM portfolio WHERE user_id = ?", friend_user_id)[0]
+                name = db.execute("SELECT username FROM users WHERE id = ?", friend_user_id)[0]
+                keys = range(4)
+                values = [port, cash, invested, name]
+                for i in keys:
+                    dicts[i] = values[i]
+                friend_list_status.append(dicts)
+            return render_template("friend.html", friends=friend_list_status)
 
 @app.route("/portfolio")
 @login_required
 def portfolio():
     user_id = session["user_id"]
+    update_portfolio(user_id)
     port = db.execute("SELECT * FROM portfolio WHERE user_id = ?", user_id)
     cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]
     invested = db.execute("SELECT SUM(value) FROM portfolio WHERE user_id = ?", user_id)[0]

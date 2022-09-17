@@ -39,5 +39,6 @@ My Portfolio
     {% else %}
         <h4><span style="font-weight: bold;"> Stocks Value:</span> {{invested["SUM(value)"] | usd}}</h4>
     {% endif %}
+    <h4><span style="font-weight: bold;">Net Worth:</span> ${{invested["SUM(value)"] + cash["cash"]}}</h2>
 </div>
 {% endblock %}

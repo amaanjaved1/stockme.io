@@ -82,3 +82,7 @@ th {
 h4 {
     text-align: right;
 }
+
+.quote_results {
+    color: var(--banana);
+}
