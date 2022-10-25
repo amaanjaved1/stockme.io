@@ -30,8 +30,6 @@ Stock trading platform simulator to teach young kids about Finance/stock markets
 - Copy the key that appears under the Token column (it should begin with pk_).
 
 ### How to run (must execute code everytime the program is ran)
-1. $ export API_KEY=value (where value is the generated key from the steps above) -- for UNIX shells
-- $ set API_KEY=value (where value is the generated key from the steps above) -- for windows
 1. $ flask run -- for UNIX shells
 - $ python app.py -- for windows
 
