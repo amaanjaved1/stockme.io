@@ -30,14 +30,13 @@
                 </a>
                 <a class="navbar-brand" href="/">stockme.io</a>
                 <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon" style="color: aliceblue; font-size: 30px; margin-top: 15px;">☴</span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbar">
                     {% if session["user_id"] %}
                         <ul class="navbar-nav me-auto mt-2">
                             <li class="nav-item"><a class="nav-link" href="/buy">Buy</a></li>
                             <li class="nav-item"><a class="nav-link" href="/sell">Sell</a></li>
-                            <div class="vl"></div>
                             <li class="nav-item"><a class="nav-link" href="/history">My Transactions</a></li>
                             <li class="nav-item"><a class="nav-link" href="/friend">My Friends</a></li>
                             <li class="nav-item"><a class="nav-link" href="/portfolio">My Portfolio</a></li>
