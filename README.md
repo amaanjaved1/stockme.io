@@ -1,4 +1,5 @@
 # Stock Trading Platform (Website)
+Live Website: https://stockme-io.onrender.com/register
 Stock trading platform simulator to teach young kids about Finance/stock markets, uses IEX API to pull live stock prices from the NASDAQ.
 
 ## Description
